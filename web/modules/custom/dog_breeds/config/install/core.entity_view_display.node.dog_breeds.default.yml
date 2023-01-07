@@ -7,6 +7,9 @@ dependencies:
     - node.type.dog_breeds
   module:
     - user
+  enforced:
+    module:
+      - dog_breeds
 id: node.dog_breeds.default
 targetEntityType: node
 bundle: dog_breeds
