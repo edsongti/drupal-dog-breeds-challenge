@@ -1,0 +1,17 @@
+uuid: 774e48dc-144e-4757-8a34-cd5c6a5789ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.dog_breeds.field_slug
+    - node.type.dog_breeds
+  module:
+    - user
+id: node.dog_breeds.default
+targetEntityType: node
+bundle: dog_breeds
+mode: default
+content: {  }
+hidden:
+  field_slug: true
+  links: true

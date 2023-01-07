@@ -1,0 +1,18 @@
+uuid: 743fbf20-9e66-4529-b3ab-5f299b537c49
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.dog_breeds
+id: node.dog_breeds.title
+field_name: title
+entity_type: node
+bundle: dog_breeds
+label: 'Common name'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
