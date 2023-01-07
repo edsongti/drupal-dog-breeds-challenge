@@ -49,8 +49,6 @@ web/.htaccess
 web/autoload.php
 web/INSTALL.txt
 web/README.md
-/composer.json
-/composer.lock
 web/example.gitignore
 web/index.php
 web/LICENSE.txt

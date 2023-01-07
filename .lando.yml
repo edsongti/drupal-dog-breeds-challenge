@@ -9,18 +9,17 @@ config:
 events:
   post-db-import:
     - appserver: cd $LANDO_WEBROOT && drush cr -y
-  post-install:
-    - appserver: cd $LANDO_WEBROOT && drush sql-drop -y
-    - appserver: cd $LANDO_WEBROOT && drush si helix --locale='en' --site-name='JNJ MedTech' --site-mail='admin@example.com' --account-name='admin' --account-mail='admin@example.com' --account-pass='admin' -y
-    - appserver: cd $LANDO_WEBROOT && drush cim -y
   post-devel:
     - appserver: cd $LANDO_WEBROOT && drush en devel webprofiler
 services:
   appserver:
     build:
       - cd $LANDO_MOUNT && composer install
-      - cp $LANDO_MOUNT/dev/settings.local.php $LANDO_MOUNT/web/sites/default/
-      - cp $LANDO_MOUNT/dev/development.services.yml $LANDO_MOUNT/web/sites/
+      # cp with the parameter -u will copy the following files
+      # only when the file is newer than the destination file
+      # or when the destination file is missing
+      - cp -u $LANDO_MOUNT/dev/settings.local.php $LANDO_MOUNT/web/sites/default/
+      - cp -u $LANDO_MOUNT/dev/development.services.yml $LANDO_MOUNT/web/sites/
 tooling:
   devel:
     description: Enable devel systems
