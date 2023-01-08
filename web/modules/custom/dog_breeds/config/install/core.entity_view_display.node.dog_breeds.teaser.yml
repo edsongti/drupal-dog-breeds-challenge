@@ -4,6 +4,7 @@ status: false
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.dog_breeds.field_breed_img
     - field.field.node.dog_breeds.field_slug
     - node.type.dog_breeds
   module:
@@ -11,6 +12,8 @@ dependencies:
   enforced:
     module:
       - dog_breeds
+_core:
+  default_config_hash: GjUdcx0lYnyqx3bi8T0nyR9rFcV0brqEOM-rDmHgimQ
 id: node.dog_breeds.teaser
 targetEntityType: node
 bundle: dog_breeds
@@ -22,4 +25,5 @@ content:
     weight: 100
     region: content
 hidden:
+  field_breed_img: true
   field_slug: true
