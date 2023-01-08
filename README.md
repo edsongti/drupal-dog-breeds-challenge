@@ -2,4 +2,5 @@
 Drupal 9 project for Dog Breeds challenge
 
 run
-lando install
+lando start
+lando composer install

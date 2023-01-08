@@ -1,0 +1,24 @@
+uuid: ab5db0f8-2acd-4ae3-8df9-3d00de93f5a1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_slug
+    - node.type.dog_breeds
+  enforced:
+    module:
+      - dog_breeds
+_core:
+  default_config_hash: m9EosH0ODknjlkVHBLElVcS6q0ufMI4P14Pm7gIU2nM
+id: node.dog_breeds.field_slug
+field_name: field_slug
+entity_type: node
+bundle: dog_breeds
+label: slug
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

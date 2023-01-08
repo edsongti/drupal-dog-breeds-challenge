@@ -1,0 +1,57 @@
+uuid: 1a0841e9-2997-4968-be96-9d2004009844
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.dog_breeds.field_slug
+    - node.type.dog_breeds
+  module:
+    - path
+  enforced:
+    module:
+      - dog_breeds
+id: node.dog_breeds.default
+targetEntityType: node
+bundle: dog_breeds
+mode: default
+content:
+  field_slug:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true
