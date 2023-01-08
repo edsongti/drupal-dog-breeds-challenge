@@ -23,8 +23,8 @@ settings:
 visibility:
   request_path:
     id: request_path
-    negate: true
-    pages: "<front>\r\n/"
+    negate: false
+    pages: '<front>'
   'entity_bundle:node':
     id: 'entity_bundle:node'
     negate: false
