@@ -1,0 +1,37 @@
+name: dog-breeds-challenge
+recipe: drupal9
+config:
+  php: '8.0'
+  via: nginx
+  webroot: web
+  database: mysql:5.7
+  xdebug: 'debug'
+events:
+  post-db-import:
+    - appserver: cd $LANDO_WEBROOT && drush cr -y
+  post-devel:
+    - appserver: cd $LANDO_WEBROOT && drush en devel webprofiler
+services:
+  appserver:
+    build:
+      - cd $LANDO_MOUNT && composer install
+      # cp with the parameter -u will copy the following files
+      # only when the file is newer than the destination file
+      # or when the destination file is missing
+      - cp -u $LANDO_MOUNT/dev/settings.local.php $LANDO_MOUNT/web/sites/default/
+      - cp -u $LANDO_MOUNT/dev/development.services.yml $LANDO_MOUNT/web/sites/
+tooling:
+  devel:
+    description: Enable devel systems
+    cmd: "true"
+    service: appserver
+  xdebug-on:
+    service: appserver
+    description: Enable xdebug for nginx.
+    cmd: docker-php-ext-enable xdebug && pkill -o -USR2 php-fpm
+    user: root
+  xdebug-off:
+    service: appserver
+    description: Disable xdebug for nginx.
+    cmd: rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && pkill -o -USR2 php-fpm
+    user: root
