@@ -4,6 +4,9 @@ status: true
 dependencies:
   config:
     - node.type.dog_breeds
+  enforced:
+    module:
+      - dog_breeds
 id: node.dog_breeds.title
 field_name: title
 entity_type: node
