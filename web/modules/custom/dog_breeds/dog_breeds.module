@@ -1,0 +1,30 @@
+<?php
+
+use Drupal\views\ViewExecutable;
+use Drupal\dog_breeds\Services\BreedImageService;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Drupal\Core\Render\Markup;
+
+/**
+ * Implements TEMPLATE_preprocess_views_view_field().
+ */
+function dog_breeds_preprocess_views_view_field(&$variables) {
+
+  $field = $variables['field'];
+
+  if ($field->field == 'field_breed_img') {
+
+    $slug = $variables['row']->_entity->field_slug->value;
+
+    $imgUrl = BreedImageService::getBreedImages($slug);
+
+    $img = "<img src='{$imgUrl}' />";
+    $rendered_image = render($img);
+    $image_markup = Markup::create($rendered_image);
+    $field->last_render = $image_markup;
+    $field->last_render_text =$image_markup;
+    $variables['output'] = $image_markup;
+
+  }
+}
