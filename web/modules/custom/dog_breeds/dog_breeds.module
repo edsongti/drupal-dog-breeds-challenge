@@ -16,8 +16,7 @@ function dog_breeds_preprocess_views_view_field(&$variables) {
   if ($field->field == 'field_breed_img') {
 
     $slug = $variables['row']->_entity->field_slug->value;
-
-    $imgUrl = BreedImageService::getBreedImages($slug);
+    $imgUrl = \Drupal::service('dog_breeds.get_breeds_img')->getBreedImages($slug);
 
     $img = "<img src='{$imgUrl}' />";
     $rendered_image = render($img);

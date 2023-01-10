@@ -1,3 +1,6 @@
 services:
   dog_breeds.get_breeds_img:
     class: Drupal\dog_breeds\Services\BreedImageService
+    arguments:
+      - "@http_client"
+      - "@logger.factory"
