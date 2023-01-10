@@ -1,11 +1,11 @@
 name: dog-breeds-challenge
 recipe: drupal9
 config:
-  php: '8.0'
+  php: "8.0"
   via: nginx
   webroot: web
   database: mysql:5.7
-  xdebug: 'debug'
+  xdebug: "debug"
 events:
   post-db-import:
     - appserver: cd $LANDO_WEBROOT && drush cr -y
@@ -15,6 +15,7 @@ services:
   appserver:
     build:
       - cd $LANDO_MOUNT && composer install
+      - "$LANDO_MOUNT/vendor/bin/phpcs --config-set installed_paths $LANDO_MOUNT/vendor/drupal/coder/coder_sniffer"
       # cp with the parameter -u will copy the following files
       # only when the file is newer than the destination file
       # or when the destination file is missing
@@ -35,3 +36,11 @@ tooling:
     description: Disable xdebug for nginx.
     cmd: rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && pkill -o -USR2 php-fpm
     user: root
+  phpcs:
+    service: appserver
+    cmd: /app/vendor/bin/phpcs --standard=Drupal,DrupalPractice --colors -s web/modules/custom/ web/sites/default
+    description: Run phpcs for given folder or file.
+  phpcbf:
+    service: appserver
+    cmd: /app/vendor/bin/phpcbf web/modules/custom/ web/sites/default
+    description: Run phpcbf for given folder or file.
