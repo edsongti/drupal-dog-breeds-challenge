@@ -67,7 +67,6 @@ class BreedImageService {
       }
     }
     catch (\Exception $e) {
-
       $this->loggerFactory->info($e->getMessage());
     }
   }
