@@ -3,6 +3,7 @@
 namespace Drupal\dog_breeds\Services;
 
 use Drupal\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use GuzzleHttp\ClientInterface;
 
@@ -54,15 +55,22 @@ class BreedImageService {
    *   Will return an array or a log in the system.
    */
   public function getBreedImages($breedSlug) {
+    $breedSlugCached = \Drupal::cache()->get($breedSlug);
+    if ($breedSlugCached) {
+        return $breedSlugCached->data;
+    }
+
+    // \Drupal::cache()->get($breedSlug, $data, CacheBackendInterface::CACHE_PERMANENT);
 
     // Call api via service API.
     $api_url = "https://dog.ceo/api/breed/{$breedSlug}/images/random";
 
     try {
       $request = $this->httpClient->get($api_url);
-
       $response = json_decode($request->getBody());
-      if ($response->status == "success") {
+      $img_url = isset($response->message) ? $response->message : NULL;
+      if ($img_url) {
+        \Drupal::cache()->set($breedSlug, $img_url, CacheBackendInterface::CACHE_PERMANENT);
         return $response->message;
       }
     }
