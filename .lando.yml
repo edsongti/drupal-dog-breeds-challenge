@@ -38,9 +38,9 @@ tooling:
     user: root
   phpcs:
     service: appserver
-    cmd: /app/vendor/bin/phpcs --standard=Drupal,DrupalPractice --colors -s web/modules/custom/
+    cmd: /app/vendor/bin/phpcs --standard=Drupal,DrupalPractice --colors -s
     description: Run phpcs for given folder or file.
   phpcbf:
     service: appserver
-    cmd: /app/vendor/bin/phpcbf web/modules/custom/ web/sites/default
+    cmd: /app/vendor/bin/phpcbf web/modules/custom/
     description: Run phpcbf for given folder or file.
