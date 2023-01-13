@@ -4,3 +4,4 @@ services:
     arguments:
       - "@http_client"
       - "@logger.factory"
+      - "@cache.default"

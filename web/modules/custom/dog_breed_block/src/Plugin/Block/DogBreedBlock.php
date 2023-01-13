@@ -4,18 +4,17 @@ namespace Drupal\dog_breed_block\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\dog_breeds\Services\BreedImageService;
 
 /**
- * Provides a 'Hello' Block.
+ * Provides a 'Dog Breed' Block.
  *
  * @Block(
  *   id = "dog_breed_custom_block",
  *   admin_label = @Translation("Dog Breed Custom Block"),
- *   category = @Translation("Hello World"),
+ *   category = @Translation("Dog Breed"),
  * )
  */
 class DogBreedBlock extends BlockBase implements ContainerFactoryPluginInterface {
@@ -36,6 +35,7 @@ class DogBreedBlock extends BlockBase implements ContainerFactoryPluginInterface
    * @param mixed $plugin_definition
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    * @param \Drupal\dog_breeds\Services\BreedImageService
+   * Service to get a dog breed image from API.
    */
   public function __construct(
     array $configuration,
@@ -72,11 +72,11 @@ class DogBreedBlock extends BlockBase implements ContainerFactoryPluginInterface
     $imgUrl = $this->breedImageService->getBreedImages($slug);
 
     if (!$imgUrl) {
-        $imgUrl = "Not foung an image for $slug dog breed";
+      $imgUrl = "Not foung an image for $slug dog breed";
     }
 
     return [
-      '#markup' =>  '<img src="' . $imgUrl . '">',
+      '#markup' => '<img src="' . $imgUrl . '">',
     ];
   }
 

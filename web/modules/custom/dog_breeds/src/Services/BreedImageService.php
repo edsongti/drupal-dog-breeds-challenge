@@ -2,7 +2,6 @@
 
 namespace Drupal\dog_breeds\Services;
 
-use Drupal\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use GuzzleHttp\ClientInterface;
@@ -31,34 +30,36 @@ class BreedImageService {
   protected $loggerFactory;
 
   /**
-   * {@inheritdoc}
+   * The cache backend service.
+   *
+   * @var \Drupal\Core\Cache\CacheBackendInterface
    */
-  public function __construct(ClientInterface $http_client, LoggerChannelFactoryInterface $logger_factory) {
-    $this->httpClient = $http_client;
-    $this->loggerFactory = $logger_factory->get('dog_breeds');
-  }
+  protected $cacheBackend;
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
-    return new static(
-          $container->get('http_client'),
-          $container->get('logger.factory')
-      );
+  public function __construct(
+    ClientInterface $http_client,
+    LoggerChannelFactoryInterface $logger_factory,
+    CacheBackendInterface $cache_default
+    ) {
+    $this->httpClient = $http_client;
+    $this->loggerFactory = $logger_factory->get('dog_breeds');
+    $this->cacheBackend = $cache_default;
   }
 
   /**
    * Method to get a dog breed image from the API.
    *
-   * @return array|NULL
+   * @return array|null
    *   Will return an array or a log in the system.
    */
   public function getBreedImages($breedSlug) {
-    $breedSlugCached = \Drupal::cache()->get($breedSlug);
+    $breedSlugCached = $this->cacheBackend->get($breedSlug);
 
     if ($breedSlugCached) {
-        return $breedSlugCached->data;
+      return $breedSlugCached->data;
     }
 
     $breedSlugNormalized = $this->normalizeBreedSlug($breedSlug);
@@ -70,7 +71,7 @@ class BreedImageService {
       $response = json_decode($request->getBody());
       $img_url = isset($response->message) ? $response->message : NULL;
       if ($img_url) {
-        \Drupal::cache()->set($breedSlug, $img_url, CacheBackendInterface::CACHE_PERMANENT);
+        $this->cacheBackend->set($breedSlug, $img_url, CacheBackendInterface::CACHE_PERMANENT);
         return $response->message;
       }
       return NULL;
@@ -80,9 +81,17 @@ class BreedImageService {
     }
   }
 
+  /**
+   * Normalize Breed Slug.
+   *
+   *  Will change "-" for "/".
+   *
+   * @return string
+   *   Return a slug normalized.
+   */
   private function normalizeBreedSlug($breedSlug) {
     if (str_contains($breedSlug, "-")) {
-      return str_replace("-","/",$breedSlug);
+      return str_replace("-", "/", $breedSlug);
     }
 
     return $breedSlug;
