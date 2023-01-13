@@ -1,0 +1,20 @@
+uuid: b3df983d-07c7-4679-8395-fbdbd23e64ee
+langcode: en
+status: true
+dependencies:
+  module:
+    - dog_breed_block
+  theme:
+    - olivero
+id: dogbreedcustomblock
+theme: olivero
+region: sidebar
+weight: 0
+provider: null
+plugin: dog_breed_custom_block
+settings:
+  id: dog_breed_custom_block
+  label: 'Dog Breed Custom Block'
+  label_display: visible
+  provider: dog_breed_block
+visibility: {  }

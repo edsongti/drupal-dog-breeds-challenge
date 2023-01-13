@@ -1,6 +1,5 @@
 <?php
 
-use Drupal\views\ViewExecutable;
 use Drupal\Core\Render\Markup;
 
 /**
@@ -11,7 +10,7 @@ function dog_breeds_preprocess_views_view_field(array &$view) {
 
   if ($field->field == 'field_breed_img') {
     $slug = $view['row']->_entity->field_slug->value;
-    $imgUrl = \Drupal::service('dog_breeds.get_breeds_img')->getBreedImages($slug);
+    $imgUrl = \Drupal::service('dog_breeds.breeds_img_service')->getBreedImages($slug);
 
     if ($imgUrl) {
       $img = "<img src='{$imgUrl}' />";

@@ -51,19 +51,19 @@ class BreedImageService {
   /**
    * Method to get a dog breed image from the API.
    *
-   * @return array|log
+   * @return array|NULL
    *   Will return an array or a log in the system.
    */
   public function getBreedImages($breedSlug) {
     $breedSlugCached = \Drupal::cache()->get($breedSlug);
+
     if ($breedSlugCached) {
         return $breedSlugCached->data;
     }
 
-    // \Drupal::cache()->get($breedSlug, $data, CacheBackendInterface::CACHE_PERMANENT);
+    $breedSlugNormalized = $this->normalizeBreedSlug($breedSlug);
 
-    // Call api via service API.
-    $api_url = "https://dog.ceo/api/breed/{$breedSlug}/images/random";
+    $api_url = "https://dog.ceo/api/breed/{$breedSlugNormalized}/images/random";
 
     try {
       $request = $this->httpClient->get($api_url);
@@ -73,10 +73,19 @@ class BreedImageService {
         \Drupal::cache()->set($breedSlug, $img_url, CacheBackendInterface::CACHE_PERMANENT);
         return $response->message;
       }
+      return NULL;
     }
     catch (\Exception $e) {
       $this->loggerFactory->info($e->getMessage());
     }
+  }
+
+  private function normalizeBreedSlug($breedSlug) {
+    if (str_contains($breedSlug, "-")) {
+      return str_replace("-","/",$breedSlug);
+    }
+
+    return $breedSlug;
   }
 
 }
