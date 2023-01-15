@@ -76,17 +76,18 @@ class DogBreedBlock extends BlockBase implements ContainerFactoryPluginInterface
    * {@inheritdoc}
    */
   public function build() {
-
     $config = $this->configFactory->get('dog_breed_block.settings');
     $slug = $config->get('dog_breed_slug');
     $imgUrl = $this->breedImageService->getBreedImages($slug);
 
-    if (!$imgUrl) {
-      $imgUrl = "Not foung an image for $slug dog breed";
+    if ($imgUrl) {
+      $markUp = '<img src="' . $imgUrl . '">';
+    } else {
+      $markUp = $this->t("<p>Not foung an image for $slug dog breed.<p>" );
     }
 
     return [
-      '#markup' => '<img src="' . $imgUrl . '">',
+      '#markup' => $markUp,
     ];
   }
 
