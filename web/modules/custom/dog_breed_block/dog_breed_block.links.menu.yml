@@ -1,0 +1,6 @@
+system.admin_group:
+  title: "Dog Breed Block Configuration"
+  description: "Add a dog breed slug to block."
+  route_name: "dog_breed_block.configuration"
+  parent: "system.admin_config_content"
+  weight: 3
