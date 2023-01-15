@@ -1,7 +1,15 @@
 <?php
 
+/**
+ * @file
+ * This file is used to write hooks that used in the Dog Breed Block module.
+ */
+
 use Drupal\Core\Block\BlockPluginInterface;
 
+/**
+ * Implements hook_preprocess_views_view_field().
+ */
 function dog_breed_block_block_view_alter(array &$build, BlockPluginInterface $block) {
   $config = \Drupal::service('config.factory')->get('dog_breed_block.settings');
   $slug = $config->get('dog_breed_slug');
@@ -9,8 +17,11 @@ function dog_breed_block_block_view_alter(array &$build, BlockPluginInterface $b
   $build['#configuration']['label'] = _normalize_title($slug);
 }
 
+/**
+ * Private function to normalize slug in a format used in API.
+ */
 function _normalize_title($slug) {
 
-  return ucwords(str_replace("-"," ",$slug));
+  return ucwords(str_replace("-", " ", $slug));
 
 }

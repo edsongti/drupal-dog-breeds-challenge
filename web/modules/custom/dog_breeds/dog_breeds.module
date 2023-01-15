@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * This file is used to write hooks that used in the Dog Breeds module.
+ */
+
 use Drupal\Core\Render\Markup;
 
 /**
@@ -17,7 +22,7 @@ function dog_breeds_preprocess_views_view_field(array &$view) {
       $rendered_image = render($img);
       $image_markup = Markup::create($rendered_image);
       $field->last_render = $image_markup;
-      $field->last_render_text =$image_markup;
+      $field->last_render_text = $image_markup;
       $view['output'] = $image_markup;
     }
   }

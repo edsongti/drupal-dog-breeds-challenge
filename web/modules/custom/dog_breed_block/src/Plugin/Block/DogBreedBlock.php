@@ -20,22 +20,32 @@ use Drupal\dog_breeds\Services\BreedImageService;
 class DogBreedBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
+   * Service to get/set configs values.
+   *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
   protected $configFactory;
 
   /**
+   * Service to get a dog breed image from API.
+   *
    * @var \Drupal\dog_breeds\Services\BreedImageService
    */
   protected $breedImageService;
 
   /**
+   * {@inheritdoc}
+   *
    * @param array $configuration
+   *   Array with config values.
    * @param string $plugin_id
+   *   Plugin Id.
    * @param mixed $plugin_definition
+   *   Service to get/set configs values.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   * @param \Drupal\dog_breeds\Services\BreedImageService
-   * Service to get a dog breed image from API.
+   *   Service to get/set configs values.
+   * @param \Drupal\dog_breeds\Services\BreedImageService $breeds_img_service
+   *   Service to get a dog breed image from API.
    */
   public function __construct(
     array $configuration,
