@@ -38,7 +38,7 @@ tooling:
     user: root
   phpcs:
     service: appserver
-    cmd: /app/vendor/bin/phpcs --standard=Drupal,DrupalPractice --colors -s
+    cmd: /app/bin/phpcs --standard=/app/phpcs.xml --colors -s
     description: Run phpcs for given folder or file.
   phpcbf:
     service: appserver
