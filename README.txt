@@ -6,7 +6,6 @@ INSTALL
 
 Run
     `lando start`
-    `lando composer install`
     `lando db-import drupal9.2023-01-17-1673998281.sql.gz`
 
 DOG BREEDS CONTENT TYPE
@@ -25,7 +24,14 @@ HOW IT WORKS
 
     Both block and content type will get an image from https://dog.ceo/ API.
 
+    Our custom module will cache API response. If you want to change dog breed images, clean the cache:
+    `lando drush cr`
+
 AFTER IMPORT DATABASE
 ---------------------
 
     You can see the block in the sidebar and a list of dog breeds in the /dog-breeds route.
+
+    Admin access:
+       user: admin
+       pass: admin
