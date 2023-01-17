@@ -15,7 +15,7 @@ services:
   appserver:
     build:
       - cd $LANDO_MOUNT && composer install
-      - "$LANDO_MOUNT/vendor/bin/phpcs --config-set installed_paths $LANDO_MOUNT/vendor/drupal/coder/coder_sniffer"
+      - "$LANDO_MOUNT/bin/phpcs --config-set installed_paths $LANDO_MOUNT/vendor/drupal/coder/coder_sniffer"
       # cp with the parameter -u will copy the following files
       # only when the file is newer than the destination file
       # or when the destination file is missing

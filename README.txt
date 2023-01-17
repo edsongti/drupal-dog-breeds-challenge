@@ -6,7 +6,6 @@ INSTALL
 
 Run
     `lando start`
-    `lando composer install`
     `lando db-import drupal9.2023-01-17-1673998281.sql.gz`
 
 DOG BREEDS CONTENT TYPE
@@ -29,3 +28,7 @@ AFTER IMPORT DATABASE
 ---------------------
 
     You can see the block in the sidebar and a list of dog breeds in the /dog-breeds route.
+
+    Admin access:
+       user: admin
+       pass: admin
