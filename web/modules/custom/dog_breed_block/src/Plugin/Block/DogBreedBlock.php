@@ -82,8 +82,9 @@ class DogBreedBlock extends BlockBase implements ContainerFactoryPluginInterface
 
     if ($imgUrl) {
       $markUp = '<img src="' . $imgUrl . '">';
-    } else {
-      $markUp = $this->t("<p>Not foung an image for $slug dog breed.<p>" );
+    }
+    else {
+      $markUp = $this->t("<p>Not foung an image for @slug dog breed.<p>", ['@slug' => $slug]);
     }
 
     return [

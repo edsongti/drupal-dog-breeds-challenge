@@ -18,12 +18,24 @@ function dog_breeds_preprocess_views_view_field(array &$view) {
     $imgUrl = \Drupal::service('dog_breeds.breeds_img_service')->getBreedImages($slug);
 
     if ($imgUrl) {
-      $img = "<img src='{$imgUrl}' />";
-      $rendered_image = render($img);
-      $image_markup = Markup::create($rendered_image);
+      $image_markup = _render_image($imgUrl);
       $field->last_render = $image_markup;
       $field->last_render_text = $image_markup;
       $view['output'] = $image_markup;
     }
   }
+}
+
+/**
+ * Render an image.
+ *
+ * @return Drupal\Core\Render\Markup
+ *   Will return an image rendered in a Markup class
+ */
+function _render_image(string $imgUrl): Markup {
+  $img = "<img src='{$imgUrl}' />";
+  $rendered_image = render($img);
+  $image_markup = Markup::create($rendered_image);
+
+  return $image_markup;
 }

@@ -52,10 +52,13 @@ class BreedImageService {
   /**
    * Method to get a dog breed image from the API.
    *
-   * @return array|null
-   *   Will return an array or a log in the system.
+   * @return string|null
+   *   Will return an URL or NULL.
+   *
+   * @throws Exception
+   *   Will log error in the system.
    */
-  public function getBreedImages($breedSlug) {
+  public function getBreedImages($breedSlug): string|NULL {
     $breedSlugCached = $this->cacheBackend->get($breedSlug);
 
     if ($breedSlugCached) {
@@ -77,20 +80,24 @@ class BreedImageService {
       return NULL;
     }
     catch (\Exception $e) {
-      $this->loggerFactory->info($e->getMessage());
+      $this->loggerFactory->error($e->getMessage());
     }
   }
 
   /**
    * Normalize Breed Slug.
    *
-   *  Will change "-" for "/".
+   *  Convert to lower case, trim and replace "-" for "/".
    *
    * @return string
    *   Return a slug normalized.
    */
-  private function normalizeBreedSlug($breedSlug) {
-    if (str_contains($breedSlug, "-")) {
+  private function normalizeBreedSlug($breedSlug): string {
+    // Lower case and trim.
+    $breedSlugLowerCase = strtolower(trim($breedSlug));
+
+    // Replace "-" to "/".
+    if (str_contains($breedSlugLowerCase, "-")) {
       return str_replace("-", "/", $breedSlug);
     }
 

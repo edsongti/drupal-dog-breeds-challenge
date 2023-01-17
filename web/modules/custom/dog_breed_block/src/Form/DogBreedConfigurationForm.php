@@ -43,7 +43,7 @@ class DogBreedConfigurationForm extends ConfigFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Dog Breed Slug'),
       '#default_value' => $config->get('dog_breed_slug'),
-      '#description' => $this->t("Add one dog slug. Separate compound nouns with dash. Examples: spitz-japanese "),
+      '#description' => $this->t("Add one dog slug. Separate compound nouns with dash. Examples: spitz-japanese."),
       '#required' => TRUE,
     ];
 
