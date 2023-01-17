@@ -11,11 +11,11 @@ id: node.dog_breeds.title
 field_name: title
 entity_type: node
 bundle: dog_breeds
-label: 'Common name'
-description: ''
+label: "Common name"
+description: ""
 required: true
 translatable: true
-default_value: {  }
-default_value_callback: ''
-settings: {  }
+default_value: {}
+default_value_callback: ""
+settings: {}
 field_type: string

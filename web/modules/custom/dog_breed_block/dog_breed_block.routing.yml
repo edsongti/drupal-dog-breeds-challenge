@@ -1,0 +1,7 @@
+dog_breed_block.configuration:
+  path: "/admin/config/dog-breed-block"
+  defaults:
+    _form: Drupal\dog_breed_block\Form\DogBreedConfigurationForm
+    _title: "Dog Breed Block Configuration"
+  requirements:
+    _permission: "administer site configuration"

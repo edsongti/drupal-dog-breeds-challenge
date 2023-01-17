@@ -4,6 +4,7 @@ status: false
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.dog_breeds.field_breed_img
     - field.field.node.dog_breeds.field_slug
     - node.type.dog_breeds
   module:
@@ -24,4 +25,5 @@ content:
     weight: 100
     region: content
 hidden:
+  field_breed_img: true
   field_slug: true

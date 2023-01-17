@@ -15,7 +15,7 @@ field_name: field_slug
 entity_type: node
 bundle: dog_breeds
 label: slug
-description: ''
+description: 'Add a dog slug. Separate compound nouns with dash. Examples: spitz-japanese.'
 required: true
 translatable: false
 default_value: {  }

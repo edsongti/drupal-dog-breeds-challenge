@@ -1,0 +1,7 @@
+services:
+  dog_breeds.breeds_img_service:
+    class: Drupal\dog_breeds\Services\BreedImageService
+    arguments:
+      - "@http_client"
+      - "@logger.factory"
+      - "@cache.default"

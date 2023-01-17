@@ -3,9 +3,11 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.dog_breeds.field_breed_img
     - field.field.node.dog_breeds.field_slug
     - node.type.dog_breeds
   module:
+    - image
     - user
   enforced:
     module:
@@ -16,7 +18,18 @@ id: node.dog_breeds.default
 targetEntityType: node
 bundle: dog_breeds
 mode: default
-content: {  }
+content:
+  field_breed_img:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   field_slug: true
   links: true

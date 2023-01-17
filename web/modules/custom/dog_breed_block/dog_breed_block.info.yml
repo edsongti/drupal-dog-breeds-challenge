@@ -1,5 +1,8 @@
-name: Dog Breeds
+name: Dog Breeds Block
 type: module
 description: "Dog Breeds content type."
 package: Custom
 core_version_requirement: ^8 || ^9
+
+dependencies:
+  - dog_breeds:dog_breeds
